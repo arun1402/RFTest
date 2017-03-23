@@ -1,0 +1,109 @@
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.annotations.*;
+
+
+public class Transaction1 {
+	
+	WebDriver driver = new FirefoxDriver();
+	
+	//Enter proper working credentials here
+	String mobile_num = "12345";
+	String password = "pwd***";
+	
+	String search_product = "Iphone 6S";
+	
+@BeforeSuite
+	
+	public void Launch_URL()
+	
+	{
+		driver.get("https://www.flipkart.com");
+		driver.manage().window().maximize();
+	}
+
+@Test(priority=1)
+
+	public void Login() throws InterruptedException
+
+	{
+		WebElement login = (new WebDriverWait(driver, 20)).until(ExpectedConditions.presenceOfElementLocated(By.xpath("//a[contains(text(),'Log In')]")));	
+		
+		driver.findElement(By.xpath("//a[contains(text(),'Log In')]")).click();
+		
+		WebElement mob_num = driver.findElement(By.xpath("(//input[@type='text'])[2]"));
+		mob_num.sendKeys(mobile_num);
+		
+		WebElement pwd = driver.findElement(By.xpath("//input[@type='password']"));
+		pwd.sendKeys(password);
+		
+		WebElement login_button = (new WebDriverWait(driver, 20)).until(ExpectedConditions.presenceOfElementLocated(By.xpath("(//button[@type='submit'])[2]")));
+		login_button.click();
+		
+		System.out.println("Login is successful");
+	}
+
+@Test(priority=2)
+
+	public void Select_Product()
+
+	{
+		//Enter Iphone 6s in search box
+		WebElement search_prod = (new WebDriverWait(driver, 20)).until(ExpectedConditions.presenceOfElementLocated(By.xpath("//input[@class='LM6RPg']")));
+		search_prod.sendKeys(search_product);
+		
+		//click on the search button
+		WebElement search_button = driver.findElement(By.xpath("//button[@type='submit']"));
+		search_button.click();
+		
+		//Select the product
+		WebElement select_iphone = (new WebDriverWait(driver, 30)).until(ExpectedConditions.presenceOfElementLocated(By.xpath("(//div[contains(text(),'Apple iPhone 6s (Space')])[1]")));
+		select_iphone.click();
+		System.out.println("IPhone is selected successfully");
+	}
+
+@Test(priority=3)
+
+	public void Add_to_Cart()
+
+	{
+		//Click on Add cart option
+		WebElement add_cart = (new WebDriverWait(driver, 30)).until(ExpectedConditions.presenceOfElementLocated(By.xpath("//li/button")));
+		add_cart.click();
+		System.out.println("Added to cart successfully");
+	}
+
+@Test(priority=4)
+
+	public void Navigate_to_Cart()
+
+	{
+		//Navigate to the Cart option
+		WebElement go_cart = (new WebDriverWait(driver, 30)).until(ExpectedConditions.presenceOfElementLocated(By.xpath("//a[@data-reactid='76']")));
+		go_cart.click();
+		System.out.println("Navigatd to cart successfully");
+	}
+
+@Test(priority=5)
+
+	public void Place_Order()
+
+	{
+		//Place the order
+		WebElement place_order = (new WebDriverWait(driver, 30)).until(ExpectedConditions.presenceOfElementLocated(By.xpath("//form/button")));
+		place_order.click();
+	}
+
+@AfterSuite
+
+public void Close_Browser()
+
+	{
+		driver.close();
+	}
+
+}
