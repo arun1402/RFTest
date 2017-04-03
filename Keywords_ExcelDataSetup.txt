@@ -1,0 +1,32 @@
+*** Settings ***
+Library           Collections
+Library           C:/Python27/Lib/site-packages/ExcelLibrary/ExcelLibrary.py
+
+*** Variables ***
+${testDataFilename}    C:/qa-automation/data/application/reportscheduler/RptSche_Testdata.xls
+${Testdata_Sheet}    Testdata
+${LocatorSetupFilename}    C:/qa-automation/data/application/reportscheduler/RptScheduler_Testdata_Locators.xls
+@{Locator_Sheets}    Bank user_Login Page    Admin&Pref    Manage_Customer    Manage_Users_Old    Manage_Users_New    Manage Report_Schedules    Copy Schedule
+...               Create_Schedule    Customize Reconciliation Report    View Schedule    Create_BU    Approve_BU    Modify Schedule
+
+*** Keywords ***
+SetupTestDataFile
+    [Arguments]    ${filename}
+    Open Excel    ${filename}    formatting_info=True
+
+GetTestcaseData
+    [Arguments]    ${sheetname}    ${testcasename}
+    ${rcount}=    Get Row Count    ${sheetname}
+    : FOR    ${row}    IN RANGE    1    ${rcount}
+    \    ${stname}=    ExcelLibrary.Read Cell Data By Coordinates    ${sheetname}    0    ${row}
+    \    Run Keyword If    '${stname}'=='${testcasename}'    CreateScalar    ${row}    ${sheetname}
+    \    Run Keyword If    '${stname}'=='${testcasename}'    Exit For Loop
+
+CreateScalar
+    [Arguments]    ${RowNo}    ${SheetName}
+    Log    row number is ${RowNo}
+    ${ColCount}=    Get Column Count    ${SheetName}
+    : FOR    ${Column}    IN RANGE    0    ${ColCount}
+    \    ${ScalarName}=    Read Cell Data By Coordinates    ${SheetName}    ${Column}    0
+    \    ${ScalarValue}=    Read Cell Data By Coordinates    ${SheetName}    ${Column}    ${RowNo}
+    \    Set Suite Variable    ${${ScalarName}}    ${ScalarValue}
