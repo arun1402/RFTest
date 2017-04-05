@@ -1,0 +1,42 @@
+Please find the exercises for Selenium Robot Session.
+
+http://newtours.demoaut.com/
+
+Exercise 1: Book Oneway trip for three passengers by getting data from excel sheet
+Exercise 2: Book round trip for three passengers by getting data from excel sheet
+Exercise 3: Register one user and book oneway trip for one passenger by getting data from excel sheet
+
+http://store.demoqa.com/
+
+Exercise 4:  Buy 2 products from this site as guest user without signing in as user
+Exercise 5: Register and buy a product from this site
+
+http://toolsqa.com/automation-practice-switch-windows/
+
+practice for switching between windows
+
+
+http://toolsqa.com/automation-practice-table
+
+Read table values from a table
+
+http://toolsqa.com/handling-alerts-using-selenium-webdriver/
+
+Practice alert popup windows
+
+http://toolsqa.com/iframe-practice-page/
+
+Exercise 6: Fill form in iframe page and navigate to different tab
+
+http://www.phptravels.net/
+
+Exercise 7: Book hotels as a guest user
+Exercise 8:  Book flights as a guest user
+Exercise 9:  Book tours as a guest user
+Exercise 10: Book hotels by registering an user in this site
+Exercise 11: Book flights by registering an user in this site
+Exercise 12: Book tours by registering an user in this site
+
+http://enterprise.demo.orangehrmlive.com/
+
+Perform some operations in the above site for 6 different users
